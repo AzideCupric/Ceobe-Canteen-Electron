@@ -31,7 +31,8 @@ async function tryFetchCookie() {
     let new_cookie_info  = await getCookieNewestInfo(datasource_comb_id);
     let {cookie_id, update_cookie_id} = new_cookie_info.data;
 
-    if (cookie_id !== old_cookie_id && update_cookie_id !== old_update_cookie_id) {
+    // 临时注释用于测试，记得恢复
+    // if (cookie_id !== old_cookie_id && update_cookie_id !== old_update_cookie_id) {
         let cookies_data = await getCookieList(datasource_comb_id, cookie_id, update_cookie_id);
         let cookies_info = cookies_data.data.data;
         old_cookie_id = cookie_id;
@@ -40,9 +41,10 @@ async function tryFetchCookie() {
         cookies_info.update_cookie_id = update_cookie_id;
 
         window.newestTimeline.sendTimeline(cookies_info);
-    }
+    // }
 
     setTimeout(async () => {
+        console.log("tryFetchCookie")
         await tryFetchCookie()
     }, 15*1000)
 }

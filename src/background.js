@@ -24,7 +24,7 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     // 在 macOS 上，当单击 dock 图标并且没有其他窗口打开时，通常会重新创建应用程序中的窗口。
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
+        createWindow()
     }
 })
 

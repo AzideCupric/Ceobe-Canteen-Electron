@@ -6,9 +6,9 @@ const {BrowserWindow, screen} = require('electron');
 
 let tray = null
 app.whenReady().then(() => {
-    ipcMain.handle('openNotificationWindow', (event, data) => {
+    ipcMain.handle('openNotificationWindow', (_, data) => {
+        console.log("will open notifi", data)
         createNotificationWindow(data);
-        createTimelineWindow();
     });
     const contextMenu = Menu.buildFromTemplate([
         { label: 'Item1', type: 'radio' },
@@ -56,7 +56,7 @@ export async function createWindow() {
         // Load the url of the dev server if in development mode
         await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
         if (!process.env.IS_TEST) {
-          win.webContents.openDevTools()
+            win.webContents.openDevTools()
         }
     } else {
         createProtocol('app')
